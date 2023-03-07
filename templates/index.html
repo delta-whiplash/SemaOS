@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='test.css') }}">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:100,200,400,500,600" rel="stylesheet" type="text/css">
+</head>
+
+<body onload="LoadPage()">
+	<div class="topnav">
+		<a class="active" href="">SemaBox</a>
+		<a class="active">IP public SemaBox : {{ ipPublique }}</a>
+		
+	  </div>
+	<div class="main-section">
+
+		
+		<div class="dashbord dashbord-blue">
+			<div class="icon-section">
+				<i class="fa fa-tasks" aria-hidden="true"></i><br>
+				<p>Speed Test</p>
+				<div id="loadspeedtest">Chargement ...</div>
+			</div>
+		</div>
+		<div class="dashbord dashbord-green">
+			<div class="icon-section">
+				<i class="fa fa-money" aria-hidden="true"></i><br>
+				<p>Test ping vers {{ hostname }}</p>
+				<form>
+					<p> <label id="latency-label">Loading...</label> </p>
+					<button class="ping-btn">Ping</button>
+				</form>
+			</div>
+
+
+		</div>
+		<div class="dashbord dashbord-orange">
+			<div class="icon-section">
+				<i class="fa fa-bell" aria-hidden="true"></i><br>
+				<p>Machines du réseau :</p>
+				<div id="netmap">
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</body>
+
+<script>
+	const HTMLLatencyLabel  = document.getElementById('latency-label');
+
+	function LoadPage(){
+		loadlatestping();
+		loadnetmap();
+		loadspeedtest();
+	}
+
+	var ping = document.querySelector('.ping-btn');
+	function loadlatestping(){
+		fetch('/ping')
+		.then(function(response){
+			return response.json();
+		})
+		.then(function(data){
+			console.log(data);
+
+			HTMLLatencyLabel.innerHTML = data+" ms";
+		})
+		.catch(function(err){
+			console.log(err);
+			HTMLLatencyLabel.innerHTML = "Error";
+		})
+	}
+	ping.addEventListener('click', loadlatestping);
+
+	function loadnetmap() {
+		fetch('/netmap')
+		.then(function(response){
+			return response.json();
+		})
+		.then(function(data){
+			console.log(data);
+			var ipListHTML = "";
+			for (var i = 0; i < data.length; i++) {
+				ipListHTML += data[i].ip + "<br>";
+			}
+			var divContainer = document.getElementById("netmap");
+			divContainer.innerHTML = ipListHTML;
+		})
+		.catch(function(err){
+			console.log(err);
+			HTMLLatencyLabel.innerHTML = "Error";
+		})
+	}
+
+	function loadspeedtest() {
+    fetch('/getspeedtest')
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        console.log(data);
+        var ipListHTML = "<table><tr><th>Download</th><th>Upload</th></tr>";
+        for (var i = 0; i < data.length; i++) {
+            ipListHTML += "<tr><td>" + data[i].download + "mbps</td><td>" + data[i].upload + "mbps</td></tr>";
+        }
+        ipListHTML += "</table>";
+        var divContainer = document.getElementById("loadspeedtest");
+        divContainer.innerHTML = ipListHTML;
+    })
+    .catch(function(err){
+        console.log(err);
+        HTMLLatencyLabel.innerHTML = "Error";
+    })
+}
+
+</script>
+
+
+</html>
