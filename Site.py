@@ -58,12 +58,17 @@ def getspeedtest():
     except Exception as e:
         return str(e)
 
-@app.route('/reboot', methods=['POST'])
+@app.route('/reboot', methods=['GET'])
 def reboot():
     try:
-        subprocess.call(['sudo', 'reboot'])
+        #subprocess.call(['sudo', 'reboot'])
+        subprocess.call(['echo', 'pas le reboot'])
         return jsonify("reboot")
     except Exception as e:
         return str(e)
+
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify('OK')
 if __name__ == '__main__':
     app.run(debug=True,host='0.0.0.0', port=9999)

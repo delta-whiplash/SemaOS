@@ -8,7 +8,7 @@ font-family: 'Raleway', sans-serif;
   overflow: hidden;
   transition: background 400ms;
   color: #fff;
-  background-color: #34495E;
+  background-color: #6116b6;
   padding: 1rem 2rem;
   font-family: 'Roboto', sans-serif;
   font-size: 1.5rem;
@@ -17,6 +17,61 @@ font-family: 'Raleway', sans-serif;
   border-radius: 0.25rem;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
   cursor: pointer;
+
+}
+
+.ping-btn:hover {
+  position: relative;
+overflow: hidden;
+transition: background 400ms;
+color: #6116b6;
+background-color: #fff;
+padding: 1rem 2rem;
+font-family: 'Roboto', sans-serif;
+font-size: 1.5rem;
+outline: 0;
+border: 0;
+border-radius: 0.25rem;
+box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+cursor: pointer;
+
+}
+
+
+
+.reboot-btn {
+  position: relative;
+overflow: hidden;
+transition: background 400ms;
+color: #fff;
+background-color: #b61812;
+padding: 0.8rem 2rem;
+font-family: 'Roboto', sans-serif;
+font-size: 1.2rem;
+outline: 0;
+border: 0;
+border-radius: 0.25rem;
+box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+cursor: pointer;
+align-items : right;
+
+}
+
+.reboot-btn:hover {
+  position: relative;
+overflow: hidden;
+transition: background 400ms;
+color: #b61812;
+background-color: #fff;
+padding: 0.8rem 2rem;
+font-family: 'Roboto', sans-serif;
+font-size: 1.2rem;
+outline: 0;
+border: 0;
+border-radius: 0.25rem;
+box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+cursor: pointer;
+align-items : right;
 
 }
 
@@ -117,3 +172,31 @@ background-color:#8E44AD;
 .dashbord-skyblue .detail-section{
 background-color:#803D9B;
 }
+
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color :rgba(0, 0, 0, 0.3);
+
+}
+
+table th {
+  background-color: #170d6e;
+  font-weight: bold;
+  padding: 10px;
+  border: 2px solid rgb(7, 9, 160);
+}
+
+table td {
+  padding: 10px;
+  border: 2px solid rgb(7, 9, 160);
+  font-weight: bold;
+}
+
+table tr:nth-child(even) {
+  background-color: #30b2da;
+  font-style: bold;
+}   

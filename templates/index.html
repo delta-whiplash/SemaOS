@@ -12,6 +12,7 @@
 	<div class="topnav">
 		<a class="active" href="">SemaBox</a>
 		<a class="active">IP public SemaBox : {{ ipPublique }}</a>
+		<button class="reboot-btn">Redémarrer</button>
 
 	</div>
 	<div class="main-section">
@@ -65,6 +66,28 @@
 		loadlatestping();
 	});
 
+
+
+
+	var ping = document.querySelector('.ping-btn');
+	ping.addEventListener('click', function (event) {
+		event.preventDefault(); // Empêcher la soumission par défaut du formulaire
+		reboot();
+	});
+
+
+
+	
+	function reboot() {
+		fetch('/reboot')
+
+	}
+
+
+
+
+
+
 	function loadlatestping() {
 		fetch('/ping')
 			.then(function (response) {
@@ -87,9 +110,9 @@
 			})
 			.then(function (data) {
 				console.log(data);
-				var ipListHTML = "";
+				var ipListHTML = "<table><tr><th>Machines</th><th>Ports ouverts</th></tr>";
 				for (var i = 0; i < data.length; i++) {
-					ipListHTML += data[i].ip + "<br>";
+					ipListHTML +="<tr><td>" + data[i].ip + "</td></tr>";
 				}
 				var divContainer = document.getElementById("netmap");
 				divContainer.innerHTML = ipListHTML;
