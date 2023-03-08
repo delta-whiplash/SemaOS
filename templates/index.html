@@ -107,13 +107,13 @@
 			})
 			.then(function (data) {
 				console.log(data);
-				var ipListHTML = "<table><tr><th>Download</th><th>Upload</th></tr>";
-				for (var i = 0; i < data.length; i++) {
-					ipListHTML += "<tr><td>" + data[i].download + "mbps</td><td>" + data[i].upload + "mbps</td></tr>";
+				var ipListHTML = "<table><tr><th>Download</th><th>Upload</th></tr>"; // création des entetes du tableau
+				for (var i = 0; i < data.length; i++) { // boucle for pour obtenir les valeurs et les mettres dans le tableau
+					ipListHTML += "<tr><td>" + data[i].download + "mbps</td><td>" + data[i].upload + "mbps</td></tr>"; // ajout des données 
 				}
-				ipListHTML += "</table>";
-				var divContainer = document.getElementById("loadspeedtest");
-				divContainer.innerHTML = ipListHTML;
+				ipListHTML += "</table>"; //fermeture du tableau
+				var divContainer = document.getElementById("loadspeedtest"); // selection de l'id loadspeedtest
+				divContainer.innerHTML = ipListHTML; // changement des données de l'id loadspeedtest
 			})
 			.catch(function (err) {
 				console.log(err);
