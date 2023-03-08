@@ -29,6 +29,6 @@ def scan_hosts(network) -> list[Host]:
         hosts.append(Host(recv[ARP].psrc))
     return hosts
 
-network = "192.168.0.0/24"
+network = "192.168.1.0/24"
 hosts = scan_hosts(network)
 print(hosts)

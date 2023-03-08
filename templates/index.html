@@ -55,22 +55,16 @@
 		loadspeedtest();
 	}
 
-	var ping = document.querySelector('.ping-btn');
-	function loadlatestping(){
-		fetch('/ping')
-		.then(function(response){
-			return response.json();
-		})
-		.then(function(data){
-			console.log(data);
-
-			HTMLLatencyLabel.innerHTML = data+" ms";
-		})
-		.catch(function(err){
-			console.log(err);
-			HTMLLatencyLabel.innerHTML = "Error";
-		})
-	}
+	$("#ping-btn").click(function(){
+		$.ajax({
+			type: "POST",
+			url: base_url + "/ping",
+			success: function(response) {
+				var latency = response;
+				$("#latency").text(latency + " ms");
+			}
+		});
+	});
 	ping.addEventListener('click', loadlatestping);
 
 	function loadnetmap() {
