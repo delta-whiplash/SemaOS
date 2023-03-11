@@ -3,6 +3,7 @@ import ipPublique
 import ping3
 import netscan
 import subprocess
+# import nmap
 # dictionaire stockant les 5 dernières valeurs débit montant et descendant 
 speedtest = [
     {
@@ -50,6 +51,18 @@ def netmap():
         return jsonify(netmap)
     except Exception as e:
         return str(e)
+
+# @app.route('/netmap', methods=['GET'])
+# def netmap():
+#     try:
+#         nm = nmap.PortScanner()
+#         netmap = {}
+#         nm.scan(hosts='192.168.1.0/24', arguments='-sS -T4 -p1-100')
+#         for host in nm.all_hosts():
+#             netmap[host] = nm[host]['tcp']
+#         return jsonify(netmap)
+#     except Exception as e:
+#         return str(e)
 
 @app.route('/getspeedtest', methods=['GET'])
 def getspeedtest():

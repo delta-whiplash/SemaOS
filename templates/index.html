@@ -69,7 +69,7 @@
 
 
 
-	var ping = document.querySelector('.ping-btn');
+	var ping = document.querySelector('.reboot-btn');
 	ping.addEventListener('click', function (event) {
 		event.preventDefault(); // Empêcher la soumission par défaut du formulaire
 		reboot();
@@ -82,10 +82,6 @@
 		fetch('/reboot')
 
 	}
-
-
-
-
 
 
 	function loadlatestping() {
