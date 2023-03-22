@@ -56,8 +56,9 @@
 		loadlatestping();
 		loadnetmap();
 		loadspeedtest();
-		setInterval(loadlatestping, 30000); // permet le rechargement automatique après 30secondes
-    	setInterval(loadnetmap, 30000); // permet le rechargement automatique après 30secondes
+		setInterval(loadlatestping, 10000); // permet le rechargement automatique après 30secondes
+    	setInterval(loadnetmap, 10000); // permet le rechargement automatique après 30secondes
+    	setInterval(loadspeedtest, 10000); // permet le rechargement automatique après 30secondes
 	}
 
 	var ping = document.querySelector('.ping-btn');
@@ -128,7 +129,7 @@
 				console.log(data);
 				var ipListHTML = "<table><tr><th>Download</th><th>Upload</th></tr>"; // création des entetes du tableau
 				for (var i = 0; i < data.length; i++) { // boucle for pour obtenir les valeurs et les mettres dans le tableau
-					ipListHTML += "<tr><td>" + data[i].download + "mbps</td><td>" + data[i].upload + "mbps</td></tr>"; // ajout des données 
+					ipListHTML += "<tr><td>" + data[i][0] + "mbps</td><td>" + data[i][1] + "mbps</td></tr>"; // ajout des données 
 				}
 				ipListHTML += "</table>"; //fermeture du tableau
 				var divContainer = document.getElementById("loadspeedtest"); // selection de l'id loadspeedtest

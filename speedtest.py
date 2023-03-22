@@ -57,3 +57,4 @@ def download_upload_speed():
     except:
         print("Erreur")
         return "error", "error"
+print(download_upload_speed())
