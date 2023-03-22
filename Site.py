@@ -32,7 +32,7 @@ class Semabox_config:
         if not os.path.exists("semaboxe-data.json"):                            # si le fichier n'existe pas on le crée
             self.name = "Semaboxe-" + str(random.randint(0, 1000))                  # on génère un nom aléatoire
             self.version = VERSION                                                  # on met la version actuelle
-            self.ip = "0.0.0.0"                                                     # on met l'ip par défaut
+            self.ip = LOCALIP                                                  # on met l'ip par défaut
             self.Save()                                                             # on crée un nouveau fichier avec les valeurs par défaut
         with open("semaboxe-data.json", "r") as f:                              # on ouvre le fichier
             data = json.load(f)                                                 # on charge les données
