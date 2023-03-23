@@ -14,7 +14,7 @@ import time
 from typing import Union
 
 VERSION = "1.0.0"
-LOCALIP = get_ip_address("wlan0")
+LOCALIP = get_ip_address("eth0")
 
 class Semabox_config:
     name: str
@@ -32,7 +32,7 @@ class Semabox_config:
         if not os.path.exists("semaboxe-data.json"):                            # si le fichier n'existe pas on le crée
             self.name = "Semaboxe-" + str(random.randint(0, 1000))                  # on génère un nom aléatoire
             self.version = VERSION                                                  # on met la version actuelle
-            self.ip = "0.0.0.0"                                                     # on met l'ip par défaut
+            self.ip = ipPublique.public_ip                                               # on met l'ip par défaut
             self.Save()                                                             # on crée un nouveau fichier avec les valeurs par défaut
         with open("semaboxe-data.json", "r") as f:                              # on ouvre le fichier
             data = json.load(f)                                                 # on charge les données
@@ -57,7 +57,14 @@ speedTestHistory: list = []                                                     
 
 
 
-#r = requests.post('http://semalynx.local:5000/api/manage-semabox/add', json=semabox_config.ToDict())  
+try :
+    print(semabox_config.ToDict())
+    r = requests.post('http://100.85.33.125:5000/api/manage-semabox/add', data=semabox_config.ToDict(), timeout=5)  
+    print("Connexion à semalynx réussie")
+except:
+    print("Erreur de connexion à semalynx")
+    pass
+
 hostname = "1.1.1.1"
 app = Flask(__name__)
 
@@ -77,7 +84,7 @@ def ping():
 @app.route('/netmap', methods=['GET'])
 def netmap():
     try:
-        netmap = scan_hosts(get_net_cidr("wlan0"))
+        netmap = scan_hosts(get_net_cidr("eth0"))
     except Exception as e:
         print("error :",e)
         netmap = []
@@ -115,6 +122,9 @@ def reboot():
 def health():
     return jsonify('OK')
 
+@app.route('/version', methods=['GET'])
+def version():
+    return jsonify(VERSION)
 
 
 def SpeedtestLoop():

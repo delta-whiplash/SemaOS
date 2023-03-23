@@ -2,7 +2,6 @@ import ipaddress
 from scapy.layers.l2 import ARP, Ether
 from scapy.sendrecv import srp
 from dataclasses import dataclass
-import nmap
 import json
 
 @dataclass
@@ -30,17 +29,3 @@ def scan_hosts(network) -> list[Host]:
     for _, recv in response:
         hosts.append(Host(recv[ARP].psrc))
     return hosts
-
-def FindPort(ip: str) -> list[int]:
-    nm = nmap.PortScanner()
-
-    nm.scan(ip, '1-1024')
-
-    scan_result = {}
-    for host in nm.all_hosts():
-        scan_result[host] = {}
-        for proto in nm[host].all_protocols():
-            lport = nm[host][proto].keys()
-            scan_result[host][proto] = lport
-
-    print(json.dumps(scan_result, indent=4))
